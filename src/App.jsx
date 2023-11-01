@@ -8,8 +8,8 @@ import Footer from './sections/Footer.jsx';
 const App = () => {
   const [sensorData, setSensorData] = useState([]);
   const [mostRecentData, setMostRecentData] = useState({});
-  const [search, setSearch] = useState('');
-  const [enter, setEnter] = useState(false);
+  const [input, setInput] = useState();
+  const [search,setSearch] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,10 +21,9 @@ const App = () => {
         setSensorData(sensorResponse.data);
         setMostRecentData(recentDataResponse.data[0]);
         if(search){
-          const filteredData = await axios.post('https://weather-backend-olj7.onrender.com/getDate',{"date":search});
+          const filteredData = await axios.post('https://weather-backend-olj7.onrender.com/getDate',{"date":input});
           console.log(filteredData.data);
           setMostRecentData(filteredData.data);
-          setEnter(false);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -38,15 +37,15 @@ const App = () => {
 
     // Clean up the interval when the component is unmounted
 
-    console.log(enter);
+    console.log();
     return () => clearInterval(intervalId);
-  }, [enter]); // Empty dependency array means this effect runs once on mount
+  }, [search]); // Empty dependency array means this effect runs once on mount
 
   return (
     <div className='min-h-screen bg-bg font-montserrat flex flex-col justify-center align-middle '>
-      <Navbar setSearch={setSearch} search={search} setEnter={setEnter}/>
+      <Navbar setInput={setInput} input={input} search={search} setSearch={setSearch}/>
       <div className='flex px-10 max-w-full gap-5 mt-2'>
-        <CurrentWeather mostRecentData={mostRecentData} search={search} />
+        <CurrentWeather mostRecentData={mostRecentData} search={search} input={input}/>
         <GraphArea sensorData={sensorData} />
       </div>
       <div className='mt-auto'>

@@ -15,13 +15,13 @@ const GraphArea = ({sensorData}) => {
             Temp
           </button>
           <button
-            className='bg-navbar hover:bg-blue-700 text-white font-bold py-2 px-4'
+            className='bg-navbar hover:bg-blue-700 text-white font-bold py-2 px-4 border-slate-400 border-x-2'
             onClick={() => setParam(2)}
           >
             Humidity
           </button>
           <button
-            className='bg-navbar hover:bg-blue-700 text-white font-bold py-2 px-4 '
+            className='bg-navbar hover:bg-blue-700 text-white font-bold py-2 px-4 border-slate-400 border-r-2'
             onClick={() => setParam(3)}
           >
             Pressure
